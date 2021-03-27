@@ -8,4 +8,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", path: "install-assets/files.sh"
 
+  config.vm.provision "shell", path: "install-assets/apache2.sh"
+
 end
