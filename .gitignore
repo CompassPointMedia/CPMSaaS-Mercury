@@ -1,3 +1,8 @@
+.idea
+.DS_Store
+compasspoint-saas.com
+.vagrant
+
 */config/development
 */logs/log-*.php
 !*/logs/index.html
@@ -15,3 +20,5 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+
+#codeigniter 4?
