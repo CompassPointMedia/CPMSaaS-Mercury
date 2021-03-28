@@ -12,7 +12,7 @@ This installer does the following:
     
 ### Usage
 
-Just run `vagrant up`
+Just run `vagrant up`, then copy the lines from `install-assets/hosts` to your computer's `/etc/hosts` file.
 
 ### Additional Information
 

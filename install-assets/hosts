@@ -1,0 +1,11 @@
+## Inflection Point Vagrant box for local testing of https://github.com/CompassPointMedia/CPMSaaS
+# this goes in your /etc/hosts file; you will probably need sudo access to add it
+
+# Use these for local testing
+# www is the public facing site for information and sign in/sign up
+# nwventures is the sample account with tables and relationships set up
+# admin is intended to be the admin console for account management
+192.168.33.103   compasspoint-saas-vagrant.com
+192.168.33.103   www.compasspoint-saas-vagrant.com
+192.168.33.103   nwventures.compasspoint-saas-vagrant.com
+192.168.33.103   admin.compasspoint-saas-vagrant.com
