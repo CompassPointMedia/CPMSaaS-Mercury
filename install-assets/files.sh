@@ -20,3 +20,9 @@ touch log/access.log
 
 git clone https://github.com/CompassPointMedia/CPMSaaS.git public_html
 
+cd public_html
+echo Running composer...
+which composer
+composer require box/spout:2.7
+
+
