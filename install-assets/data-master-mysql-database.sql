@@ -214,6 +214,7 @@ UNLOCK TABLES;
 
 CREATE TABLE `sys_data_object_config` (
   `id` int(14) unsigned NOT NULL AUTO_INCREMENT,
+  `data_object` char(40) DEFAULT 'default',
   `object_id` int(11) unsigned DEFAULT NULL COMMENT 'polymorphic on multiple tables',
   `object_type` enum('sys_data_object','sys_table','sys_data_group','sys_data_group_xref') NOT NULL DEFAULT 'sys_data_object' COMMENT 'polymorphic on multiple tables',
   `user_id` int(11) unsigned DEFAULT NULL COMMENT 'Null value means global value',

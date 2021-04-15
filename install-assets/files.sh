@@ -1,3 +1,11 @@
+echo Creating mysql assets...
+
+# configure users in the MySQL database
+mysql -u root -proot < /var/www/tmp/data-install.sql
+
+# remove the install script (but leave the uninstall script in place for reference)
+rm /var/www/tmp/data-install.sql
+
 # Add the following files for web structure and any other assets here
 
 echo Provisioning log folder, private configuration file and application repositories...
