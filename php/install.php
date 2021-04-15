@@ -199,11 +199,9 @@ DatabaseTemplate::validateTmpFolder();
 $interactive = new Interactive($steps);
 $data = $interactive->execute();
 
-// $data = json_decode('{"0":"y","baseDomain":"olearycapital.com","firstName":"Johnson","lastName":"O\'Leary","email":"johnson.oleary@ymail.com","password":"yamaLama1!","accountName":"Johnson O\'Leary Enterprises, Inc.","accountIdentifier":"olearyenterprises","accountDescription":"Marketing consultant","otherUser":true,"userFirstName":"Sam \"The Dawg\"","userLastName":"Fullman","userEmail":"samuel.fullman@gmail.com","userPassword":"nataliaEver4!","summary":"y"}', true);
-print_r($data);
+// print_r($data);
 
-
-echo json_encode($data) . PHP_EOL;
+// echo json_encode($data) . PHP_EOL;
 
 $template = new DatabaseTemplate($data);
 $template->execute();
