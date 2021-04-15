@@ -6,6 +6,8 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.33.103"
   config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=757"]
 
+  config.vm.provision "shell", path: "install-scripts/mysql.sh"
+
   config.vm.provision "shell", path: "install-assets/files.sh"
 
   config.vm.provision "shell", path: "install-assets/apache2.sh"

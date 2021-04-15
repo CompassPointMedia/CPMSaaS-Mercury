@@ -7,10 +7,16 @@ date > /etc/vagrant_provisioned_at
 
 mkdir /var/www/compasspoint-saas.com
 cd /var/www/compasspoint-saas.com
+
 mkdir private
-cp /var/www/install-assets/config.php private
+
+# place the config.php file in place with the master MySQL connection
+mv /var/www/tmp/config.php /var/www/compasspoint-saas.com/private
+
 mkdir log
+
 touch log/error.log
 touch log/access.log
+
 git clone https://github.com/CompassPointMedia/CPMSaaS.git public_html
 
