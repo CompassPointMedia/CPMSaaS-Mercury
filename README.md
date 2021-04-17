@@ -5,7 +5,11 @@
 3. On your local machine, copy the lines from `tmp/hosts` into your computer's /etc/hosts file
 
 You can now go to http://youraccount.yourdomain.com/ and log in with the email and password you created!
+NOTE: see Known Bugs below on starting Apache
 
+### Known Bugs
+
+Okay, I pretty much give up for now.  I have not been able to reliably start Apache so you can just /GO/ to your URL.  You'll probably to log into your box (as root with password `root`), and type `yo-apache-start`.  If you have a solution to this (to start Apache on initial provisioning, and also every time `vagrant up` is called), please let me know!
 
 ### More Detail
 There is actually quite a bit that happens during the install process.  This installer does the following:
