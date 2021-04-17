@@ -14,4 +14,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", path: File.join(dir, "install-assets/apache2.sh")
 
+  config.vm.provision "shell", inline: "source /etc/apache2/envvars && service apache2 restart && echo \"Apache (re)start complete\"",
+    run: "always"
+
 end

@@ -1,10 +1,8 @@
-# Short and Simple Instructions
+### Short and Simple Instructions
 
 1. Make sure `installer.sh` in the root directory is executable.  `chmod a-x installer.sh` should work if needed.
 2. Run `./installer.sh` and follow the prompts
-3. Once created, log in to the server with `ssh root@192.168.33.103` (password is also `root`)
-4. Type `yo-apache-start`; this will gracefully (re)start apache with the envvars in place.
-5. On your local machine, copy the lines from `tmp/hosts` into your computer's /etc/hosts file
+3. On your local machine, copy the lines from `tmp/hosts` into your computer's /etc/hosts file
 
 You can now go to http://youraccount.yourdomain.com/ and log in with the email and password you created!
 
@@ -21,6 +19,9 @@ There is actually quite a bit that happens during the install process.  This ins
 * Creates internal MySQL users with permissions to the specific account databases (one database = one account = one subdomain currently)
 * Creates a `config.php` file in the `private` folder; this contains the "master" MySQL connection to the Control database and all the account databases
 * Creates the `hosts` file; add these lines to your `/etc/hosts` for local testing on your computer.  NOTE: since CompassPoint SAAS uses subdomains to determine the account, you can't get to a specific account by simply accessing http://<base-ip-address>
+
+### About Provisioning
+The above scripts for setting up Apache and MySQL are one-offs; if there was a problem creating the VM, you may need to rebuild your box, or manually fix the problem.  Note that there is a script in Vagrantfile set to run always, that (re)starts Apache2 each time you enter `vagrant up`.  There's also a shortcut command `yo-apache-start` when you log in as root found in `.bash_profile`.
 
 ### Requirements
 Running the installer requires PHP.  Probably ANY version of PHP.  No database, just PHP.  Go on, hold your nose and install it if you don't have it, you can uninstall it afterward; it was easiest for me to write the content manipulation needed in PHP (which I can do in my sleep) vs. say Python.
