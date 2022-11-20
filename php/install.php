@@ -23,7 +23,7 @@ Please be sure you\'ve read the "Installation Instructions" in the README.md fil
             if (!strlen(trim($value))) {
                 return true;
             }
-            if (!in_array(strtolower($value{0}), ['y', 1,])) {
+            if (!in_array(strtolower(substr($value, 0, 1)), ['y', 1,])) {
                 echo PHP_EOL . 'exiting..' . PHP_EOL;
                 exit(0);
             }
@@ -99,7 +99,7 @@ Please be sure you\'ve read the "Installation Instructions" in the README.md fil
                 $value = true;
                 return;
             }
-            if (!in_array(strtolower($value{0}), ['y', 1,])) {
+            if (!in_array(strtolower(substr($value, 0, 1)), ['y', 1,])) {
                 $value = false;
                 return;
             }
@@ -184,7 +184,7 @@ Please be sure you\'ve read the "Installation Instructions" in the README.md fil
             if (!strlen(trim($value))) {
                 return true;
             }
-            if (!in_array(strtolower($value{0}), ['y', 1,])) {
+            if (!in_array(strtolower(substr($value, 0, 1)), ['y', 1,])) {
                 echo PHP_EOL . 'exiting..' . PHP_EOL;
                 exit(0);
             }

@@ -150,7 +150,7 @@ class DatabaseTemplate
 
     public function generateUsernameFromFirstLast($first, $last, $existing = '') {
         $first = preg_replace('/[^a-z]+/i', '', $first);
-        $first = !empty($first{0}) ? $first{0} : 'a';
+        $first = !empty(substr($first, 0, 1)) ? substr($first,0,1) : 'a';
         $last = preg_replace('/[^a-z]+/i', '', $last);
         $username = strtolower($first . $last);
         if ($username === $existing) {
