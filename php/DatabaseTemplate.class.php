@@ -12,7 +12,7 @@ class DatabaseTemplate
      * @comment NOTE!! Don't change this unless you change it in the Vagrantfile as well!
      * @var string $baseIpAddress
      */
-    public $baseIpAddress = '192.168.33.103';
+    public $baseIpAddress = '192.168.33.201';
 
     public static function validateTmpFolder() {
         if (!is_dir('./tmp')) {
