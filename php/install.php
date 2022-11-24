@@ -6,6 +6,11 @@
  */
 require 'php/Interactive.class.php';
 require 'php/DatabaseTemplate.class.php';
+require 'php/Vagrant.class.php';
+require 'php/ColorCode.class.php';
+
+$baseIpAddress = Vagrant::$baseIpAddress;
+
 
 /**
  * @version: 0.1.01  First-ever interview; creates user, account and extra user if desired
@@ -32,6 +37,12 @@ Please be sure you\'ve read the "Installation Instructions" in the README.md fil
     ],
     [
         'output' => 'Ok, here we go..',
+    ],
+    [
+        'id' => 'baseIpAddress',
+        'prompt' => 'Enter an IP address for your Vagrant box, should start with 192.168 ($__default_value)',
+        'validate' => 'ipAddress',
+        'default' => $baseIpAddress,
     ],
     [
         'id' => 'baseDomain',
@@ -149,7 +160,7 @@ Please be sure you\'ve read the "Installation Instructions" in the README.md fil
     'summary' => [
         'id' => 'summary',
         'prompt' => function ($data) {
-            $prompt = "Here is the information you are creating:" . PHP_EOL;
+            $prompt = PHP_EOL . "Here is the information you are creating:" . PHP_EOL;
 
             $list = [];
             $pad = 0;
@@ -196,13 +207,28 @@ Please be sure you\'ve read the "Installation Instructions" in the README.md fil
 // validate this first
 DatabaseTemplate::validateTmpFolder();
 
-$interactive = new Interactive($steps);
+// get the defaults for dev testing if present
+$defaults = [];
+$defaultsFile = 'install-assets/defaults.json';
+if (file_exists($defaultsFile)) {
+    echolor(PHP_EOL . "*** Entering defaults values mode for dev testing; this is because you have file install-assets/defaults.json present ***" . PHP_EOL . PHP_EOL, ColorCode::CC_CYAN);
+    $defaults = implode('', file($defaultsFile));
+    $defaults = json_decode($defaults, true);
+}
+
+$interactive = new Interactive($steps, $defaults);
 $data = $interactive->execute();
 
 // print_r($data);
 
 // echo json_encode($data) . PHP_EOL;
 
+$vagrant = new Vagrant();
+$vagrant->execute($data);
+
 $template = new DatabaseTemplate($data);
 $template->execute();
+
+echolor("Completed MySQL and Apache file asset creation.." . PHP_EOL . PHP_EOL, ColorCode::CC_GREEN);
+
 

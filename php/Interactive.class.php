@@ -34,6 +34,11 @@ class Interactive
      */
     public $steps = [];
 
+    /**
+     * @var array $defaults
+     */
+    public $defaults = [];
+
     public $validationErrorMessages = [
         'email' => 'Email not valid',
         'notBlank' => 'Value cannot be blank',
@@ -44,10 +49,12 @@ class Interactive
     /**
      * Interactive constructor.
      * @param $steps array
+     * @param $defaults array
      */
-    public function __construct($steps)
+    public function __construct($steps, $defaults = [])
     {
         $this->steps = $steps;
+        $this->defaults = $defaults;
     }
 
     /**
@@ -104,10 +111,15 @@ class Interactive
         }
         echo ': ';
 
-        if (!empty($step['hidden'])) {
-            $value = $this->prompt_silent();
+        if (!empty($step['id']) && count($this->defaults) > 0 && isset($this->defaults[$step['id']])) {
+            $value = $this->defaults[$step['id']];
+            echo PHP_EOL;
         } else {
-            $value = trim(fgets(STDIN));
+            if (!empty($step['hidden'])) {
+                $value = $this->prompt_silent();
+            } else {
+                $value = trim(fgets(STDIN));
+            }
         }
 
         // Assign default value if present and input is blank
@@ -285,6 +297,10 @@ class Interactive
     public function validateNotBlank($value, $format = [])
     {
         return strlen(trim($value)) > 0;
+    }
+
+    public function validateIpAddress($value, $format = []) {
+        return filter_var($value, FILTER_VALIDATE_IP);
     }
 
     public function validatePassword($value, $format = [])

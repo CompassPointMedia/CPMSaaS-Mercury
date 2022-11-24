@@ -1,7 +1,11 @@
+# Mercury installer for FlexionPoint Database as a Service (DaaS) application
+# @author: Samuel Fullman
 
 Vagrant.configure("2") do |config|
 
   config.vm.box = "inflectionpoint/throwaway2"
+  # change this as updates are made but this seems stable
+  config.vm.box_version = "0.0.16"
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize [ "modifyvm", :id, "--uart1", "off" ]
@@ -10,7 +14,11 @@ Vagrant.configure("2") do |config|
     vb.customize [ "modifyvm", :id, "--uart4", "off" ]
   end
 
-  config.vm.network "private_network", ip: "192.168.33.201"
+  ## @comment NOTE!! Don't change IP unless you change it in php/Vagrant.class.php also!
+  ## it can be changed in the installer.sh interview or install-assets/defaults.json file (see README)
+  config.vm.network "private_network", ip: "192.168.33.214"
+
+
   config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=757"]
 
 
@@ -19,9 +27,11 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", path: File.join(dir, "install-assets/files.sh")
 
+
   config.vm.provision "shell", path: File.join(dir, "install-assets/apache2.sh")
 
-  config.vm.provision "shell", inline: "source /etc/apache2/envvars && service apache2 restart && echo \"Apache (re)start complete\"",
+
+  config.vm.provision "shell", path: File.join(dir, "install-assets/restart.sh"),
     run: "always"
 
 end

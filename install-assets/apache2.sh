@@ -2,12 +2,5 @@
 
 echo Configuring Apache2...
 mv /var/www/tmp/compasspoint-saas.com.conf /etc/apache2/sites-available
-cd /etc/apache2/sites-enabled
-ln -s ../sites-available/compasspoint-saas.com.conf
+a2ensite compasspoint-saas.com.conf
 
-cd ~
-
-# yo-apache-start - alias for below, see root/.bash_profile
-# BUG/ISSUE: when I log into the box and type `service apache2 status` it shows exited
-# However I can run this again at that point, and it works fine
-source /etc/apache2/envvars && service apache2 restart && apache2 -V && apache2 -S && service apache2 status

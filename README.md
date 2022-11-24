@@ -24,6 +24,9 @@ There is actually quite a bit that happens during the install process.  This ins
 * Creates a `config.php` file in the `private` folder; this contains the "master" MySQL connection to the Control database and all the account databases
 * Creates the `hosts` file; add these lines to your `/etc/hosts` for local testing on your computer.  NOTE: since CompassPoint SAAS uses subdomains to determine the account, you can't get to a specific account by simply accessing http://<base-ip-address>
 
+### Sample default data for interview
+There is a file called `install-assets/defaults.json.template`; rename it to simply `defaults.json` in that folder, and the values of that file will be inserted in the interview and the interview will be skipped.
+
 ### About Provisioning
 The above scripts for setting up Apache and MySQL are one-offs; if there was a problem creating the VM, you may need to rebuild your box, or manually fix the problem.  Note that there is a script in Vagrantfile set to run always, that (re)starts Apache2 each time you enter `vagrant up`.  There's also a shortcut command `yo-apache-start` when you log in as root found in `.bash_profile`.
 

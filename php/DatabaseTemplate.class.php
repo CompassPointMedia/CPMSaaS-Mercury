@@ -8,12 +8,6 @@ class DatabaseTemplate
 {
     public $data = [];
 
-    /**
-     * @comment NOTE!! Don't change this unless you change it in the Vagrantfile as well!
-     * @var string $baseIpAddress
-     */
-    public $baseIpAddress = '192.168.33.201';
-
     public static function validateTmpFolder() {
         if (!is_dir('./tmp')) {
             $result = mkdir('./tmp');
@@ -28,7 +22,6 @@ class DatabaseTemplate
 
     public function __construct($data) {
         $this->data = $data;
-        $this->data['baseIpAddress'] = $this->baseIpAddress;
     }
 
     public function execute() {
@@ -126,6 +119,10 @@ class DatabaseTemplate
             $confString = str_replace('{' . $key . '}', $value, $confString);
         }
         $this->write('tmp/compasspoint-saas.com.conf', $confString);
+
+        // Create misc. files for bash to read
+        $this->write('tmp/account', $this->data['accountIdentifier']);
+        $this->write('tmp/domain', $this->data['baseDomain']);
     }
 
     public function generateDbName($type = '') {
